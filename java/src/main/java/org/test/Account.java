@@ -8,6 +8,6 @@ public interface Account extends Report {
     public void deposit(float x);
 
     // Снять деньги со счета
-    public void withdraft(float x);
+    public void withdraft(float x) throws NotEnoughFundsException;
 
 }

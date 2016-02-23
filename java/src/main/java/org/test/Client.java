@@ -1,10 +1,15 @@
 package org.test;
 
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
+    private static final Logger log = LogManager.getLogger(Client.class);
     private String name;
     private List<Account> accounts= new ArrayList<Account>();
     private Account activeAccount;
@@ -24,10 +29,16 @@ public class Client {
             account instanceof CheckingAccount) {
             ((CheckingAccount) account).setOverdraft(initialOverdraft);
         }
-        setActiveAccount(account);
-        accounts.add(account);
+        addAccount(account);
     }
 
+    public void addAccount(Account account) {
+
+        if (activeAccount == null) {
+            setActiveAccount(account);
+        }
+        accounts.add(account);
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -36,10 +47,26 @@ public class Client {
         this.activeAccount = activeAccount;
     }
 
+    public Account getActiveAccount() {
+        return activeAccount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getInitialOverdraft() {
+        return initialOverdraft;
+    }
+
     public void deposit(float x) {
         if (activeAccount != null) {
             activeAccount.deposit(x);
         } else {
+            log.log(Level.ERROR, "Deposit is not possible. \n" +
+                    "Ddeposit with value" +
+                    x +
+                    "  for active account is not possible. Account not defined. ");
             throw new RuntimeException("Deposit is not possible. \n" +
                     "Ddeposit with value" +
                     x +
@@ -47,10 +74,14 @@ public class Client {
         }
     }
 
-    public void withdraw(float x) {
+    public void withdraw(float x)  throws NotEnoughFundsException {
         if (activeAccount != null) {
             activeAccount.withdraft(x);
         } else {
+            log.log(Level.ERROR,"Withdraft( is not possible. \n" +
+                    "Withdraft with value" +
+                    x +
+                    "  for active account is not possible. Account not defined. ");
             throw new RuntimeException("Withdraft( is not possible. \n" +
                     "Withdraft with value" +
                     x +
@@ -59,8 +90,15 @@ public class Client {
     }
 
     public Account createAccount(String accountType) {
-        Account newAccout = null;
+        Account newAccout;
         if (!accountType.equals(CLIENT_CHECKING_ACCOUNT_TYPE) && !accountType.equals(CLIENT_SAVING_ACCOUNT_TYPE)) {
+            log.log(Level.ERROR,"Account creation is not possible. \n" +
+                    "Defined accountType: " +
+                    accountType +
+                    "  is not accessible. Accessible list(" +
+                    CLIENT_CHECKING_ACCOUNT_TYPE + ", " +
+                    CLIENT_SAVING_ACCOUNT_TYPE +
+                    ". ");
             throw new RuntimeException("Account creation is not possible. \n" +
                     "Defined accountType: " +
                     accountType +
