@@ -34,24 +34,26 @@ public class Bank implements Report {
     public void registerEvent(ClientRegistrationListener listener) {
         listeners.add(listener);
     }
+
     public Bank() {
         registerEvent(new PrintClientListener());
         registerEvent(new EmailNotificationListener());
     }
 
-    private void checkDuplicateName(Client client) throws ClientExistsException
-    {
-        for (int i=1; i<=clients.size();i++) {
-            if(clients.get(i-1).getName().equals(client.getName())){
+    private void checkDuplicateName(Client client) throws ClientExistsException {
+        for (Client tempClient : clients) {
+            if (tempClient.getName().equals(client.getName())) {
                 throw new ClientExistsException();
             }
         }
     }
+
     public void addClient(Client client) throws ClientExistsException {
         checkDuplicateName(client);
         clients.add(client);
-        for (ClientRegistrationListener listener : listeners)
+        for (ClientRegistrationListener listener : listeners) {
             listener.onClientAdded(client);
+        }
     }
 
     public List<Client> getClients() {
@@ -71,8 +73,8 @@ public class Bank implements Report {
         System.out.printf("Bank balance : %.2f\n", bankBalance);
         System.out.println("Client lists (client counts:" + clients.size() + "):");
         Client client;
-        for (int i = 1; clients != null && i <= clients.size(); i++) {
-            client = clients.get(i - 1);
+        for (int i = 0; clients != null && i < clients.size(); i++) {
+            client = clients.get(i);
             System.out.println("==============================================================");
             System.out.println("Clinet # [" + i + "]");
             System.out.println("==============================================================");
@@ -83,10 +85,10 @@ public class Bank implements Report {
             client.getActiveAccount().printReport();
             List<Account> accounts = client.getAccounts();
             System.out.println("  Client accounts information  (accounts count " + accounts.size() + ") :");
-            for (int j = 1; j <= accounts.size(); j++) {
+            for (int j = 0; j < accounts.size(); j++) {
                 //System.out.println("--------------------------------------------------------------");
                 System.out.println("Account # [" + j + "]");
-                accounts.get(j - 1).printReport();
+                accounts.get(j).printReport();
                 System.out.println("--------------------------------------------------------------");
             }
             System.out.println("==============================================================");

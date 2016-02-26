@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public abstract class AbstractAccount implements Account {
-    private static final Logger log = LogManager.getLogger(AbstractAccount.class);
+    private final Logger log = LogManager.getLogger(this.getClass());
     private float balance;
 
     public void deposit(float x) {

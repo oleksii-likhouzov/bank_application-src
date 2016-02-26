@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="console-log" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{dd.MM.yyyy HH:mm:ss.SSS} -%t %-5p [%c] - %m%n"/>
+        </Console>
+
+        <RollingFile name="debug-log" filename="../logs/bank-application-debug.log" filePattern="../logs/bank-application-debug-%d{dd-MM-yyyy}.log">
+            <PatternLayout>
+                <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} -%t %-5p [%c] - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="info-log" filename="../logs/bank-application-info.log" filePattern="../logs/bank-application-info-%d{dd-MM-yyyy}.log">
+            <PatternLayout>
+                <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} -%t %-5p [%c] - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="error-log" filename="../logs/bank-application-error.log" filePattern="../logs/bank-application-error-%d{dd-MM-yyyy}.log">
+            <PatternLayout>
+                <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} -%t %-5p [%c] - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.test" level ="all" additivity="true">
+            <appender-ref ref="debug-log" level="debug"/>
+            <appender-ref ref="info-log" level="info"/>
+            <appender-ref ref="error-log" level="error"/>
+        </Logger>
+        <Root level="all" additivity="false">
+            <AppenderRef ref="console-log" />
+        </Root>
+    </Loggers>
+</Configuration>

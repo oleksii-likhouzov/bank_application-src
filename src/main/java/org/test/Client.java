@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    private static final Logger log = LogManager.getLogger(Client.class);
+    private final Logger log = LogManager.getLogger(this.getClass());
     private String name;
-    private List<Account> accounts= new ArrayList<Account>();
+    private List<Account> accounts = new ArrayList<Account>();
     private Account activeAccount;
     private float initialOverdraft;
     final static int INITIAL_OVERDRTAFT = 300;
@@ -23,10 +23,10 @@ public class Client {
     }
 
     public Client(float initialOverdraft) {
-        Account account= createAccount(initialOverdraft==0?CLIENT_SAVING_ACCOUNT_TYPE:CLIENT_CHECKING_ACCOUNT_TYPE);
+        Account account = createAccount(initialOverdraft == 0 ? CLIENT_SAVING_ACCOUNT_TYPE : CLIENT_CHECKING_ACCOUNT_TYPE);
         this.initialOverdraft = initialOverdraft;
         if (account != null &&
-            account instanceof CheckingAccount) {
+                account instanceof CheckingAccount) {
             ((CheckingAccount) account).setOverdraft(initialOverdraft);
         }
         addAccount(account);
@@ -39,6 +39,7 @@ public class Client {
         }
         accounts.add(account);
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -74,11 +75,11 @@ public class Client {
         }
     }
 
-    public void withdraw(float x)  throws NotEnoughFundsException {
+    public void withdraw(float x) throws NotEnoughFundsException {
         if (activeAccount != null) {
             activeAccount.withdraft(x);
         } else {
-            log.log(Level.ERROR,"Withdraft( is not possible. \n" +
+            log.log(Level.ERROR, "Withdraft( is not possible. \n" +
                     "Withdraft with value" +
                     x +
                     "  for active account is not possible. Account not defined. ");
@@ -92,7 +93,7 @@ public class Client {
     public Account createAccount(String accountType) {
         Account newAccout;
         if (!accountType.equals(CLIENT_CHECKING_ACCOUNT_TYPE) && !accountType.equals(CLIENT_SAVING_ACCOUNT_TYPE)) {
-            log.log(Level.ERROR,"Account creation is not possible. \n" +
+            log.log(Level.ERROR, "Account creation is not possible. \n" +
                     "Defined accountType: " +
                     accountType +
                     "  is not accessible. Accessible list(" +
@@ -116,18 +117,17 @@ public class Client {
         }
         return newAccout;
     }
-    public List<Account> getAccounts()
-    {
+
+    public List<Account> getAccounts() {
         return accounts;
     }
 
     public float getBalance() {
-        Account tmpAccount;
         float result = 0.f;
-        for (int i = 0; i < accounts.size(); i++) {
-            tmpAccount = accounts.get(i);
-            if (tmpAccount !=null) {
-                result = result + tmpAccount.getBalance();
+
+        for (Account account:accounts) {
+            if (account != null) {
+                result = result + account.getBalance();
             }
         }
         return result;

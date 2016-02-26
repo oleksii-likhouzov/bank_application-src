@@ -5,11 +5,7 @@ public class OverDraftLimitExceededException extends NotEnoughFundsException {
     private CheckingAccount account;
     private float withdraft;
 
-    public OverDraftLimitExceededException() {
-
-    }
-
-    public OverDraftLimitExceededException(CheckingAccount account, float withdraft ){
+    public OverDraftLimitExceededException(CheckingAccount account, float withdraft) {
         this.account = account;
         this.withdraft = withdraft;
     }

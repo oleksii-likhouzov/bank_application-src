@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class CheckingAccount extends AbstractAccount {
-    private static final Logger log = LogManager.getLogger(CheckingAccount.class);
+    private final Logger log = LogManager.getLogger(this.getClass());
     private float overdraft;
 
     public float getOverdraft() {
@@ -33,7 +33,7 @@ public final class CheckingAccount extends AbstractAccount {
                     "  for account is not possible. Account balance: " +
                     getBalance() +
                     ". Account overdraft:" + overdraft);
-            throw new OverDraftLimitExceededException (this, x);
+            throw new OverDraftLimitExceededException(this, x);
         }
         setBalance(getBalance() - x);
     }

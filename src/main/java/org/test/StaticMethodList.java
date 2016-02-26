@@ -14,7 +14,7 @@ public class StaticMethodList {
      *
      * @param array список символов
      */
-    public static void printCharacterArray(char[] array) {
+    public static void print(char[] array) {
         if (array != null) {
             System.out.println(array);
         }
@@ -25,18 +25,15 @@ public class StaticMethodList {
      *
      * @param array двумерный массив строк
      */
-    public static void printStringArray(String[][] array) {
-
-        if (array != null) {
-            for (int i = 1; i <= array.length; i++) {
-                System.out.print("[" + i + "]|");
-                if (array[i - 1] != null) {
-                    for (int j = 1; j <= array[i - 1].length; j++) {
-                        System.out.print("[" + i + "][" + j + "]" + array[i - 1][j - 1] + ',');
-                    }
+    public static void print(String[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print("[" + (i + 1) + "]|");
+            if (array[i] != null) {
+                for (int j = 0; j < array[i].length; j++) {
+                    System.out.print("[" + i + "][" + j + "]" + array[i][j] + ',');
                 }
-                System.out.println("");
             }
+            System.out.println("");
         }
     }
 
@@ -48,18 +45,17 @@ public class StaticMethodList {
      * @return - массив символов
      */
     static public char[][] convertIntArrayToCharArray(int[][] array) {
-        char resultArray[][] = null;
-        if (array != null) {
-            resultArray = new char[array.length][];
-            for (int i = 1; i <= array.length; i++) {
-                if (array[i - 1] != null) {
-                    resultArray[i - 1] = new char[array[i - 1].length];
-                    for (int j = 1; j <= array[i - 1].length; j++) {
-                        resultArray[i - 1][j - 1] = (char) array[i - 1][j - 1];
-                    }
-                } else {
-                    resultArray[i - 1] = null;
+        char resultArray[][];
+
+        resultArray = new char[array.length][];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != null) {
+                resultArray[i] = new char[array[i].length];
+                for (int j = 0; j < array[i].length; j++) {
+                    resultArray[i][j] = (char) array[i][j];
                 }
+            } else {
+                resultArray[i] = null;
             }
         }
         return resultArray;
@@ -70,17 +66,15 @@ public class StaticMethodList {
      *
      * @param array двумерный массив строк
      */
-    public static void printCharArray(char[][] array) {
-        if (array != null) {
-            for (int i = 1; i <= array.length; i++) {
-                System.out.print("[" + i + "]|");
-                if (array[i - 1] != null) {
-                    for (int j = 1; j <= array[i - 1].length; j++) {
-                        System.out.print("[" + i + "][" + j + "]" + "code =" + (int) array[i - 1][j - 1] + "(0x" + Integer.toHexString(array[i - 1][j - 1]) + ')' + ',');
-                    }
+    public static void print(char[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print("[" + i + "]|");
+            if (array[i] != null) {
+                for (int j = 0; j < array[i].length; j++) {
+                    System.out.print("[" + i + "][" + j + "]" + "code =" + (int) array[i][j] + "(0x" + Integer.toHexString(array[i][j]) + ')' + ',');
                 }
-                System.out.println("");
             }
+            System.out.println("");
         }
     }
 
@@ -89,17 +83,15 @@ public class StaticMethodList {
      *
      * @param array двумерный массив строк
      */
-    public static void printIntArray(int[][] array) {
-        if (array != null) {
-            for (int i = 1; i <= array.length; i++) {
-                System.out.print("[" + i + "]|");
-                if (array[i - 1] != null) {
-                    for (int j = 1; j <= array[i - 1].length; j++) {
-                        System.out.print("[" + i + "][" + j + "]" + array[i - 1][j - 1] + ',');
-                    }
+    public static void print(int[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print("[" + i + "]|");
+            if (array[i] != null) {
+                for (int j = 0; j < array[i].length; j++) {
+                    System.out.print("[" + i + "][" + j + "]" + array[i][j] + ',');
                 }
-                System.out.println("");
             }
+            System.out.println("");
         }
     }
 
@@ -109,11 +101,9 @@ public class StaticMethodList {
      * @param array - data array for invert action
      */
     public static void invertIntArray(int[][] array) {
-        if (array != null) {
-            for (int i = 1; i <= array.length; i++) {
-                for (int j = 1; array[i - 1] != null && j <= array[i - 1].length; j++) {
-                    array[i - 1][j - 1] = -array[i - 1][j - 1];
-                }
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; array[i] != null && j < array[i].length; j++) {
+                array[i][j] = -array[i][j];
             }
         }
     }
@@ -163,8 +153,8 @@ public class StaticMethodList {
      */
     public static int maxListInt(int a, int b, int... list) {
         int result = maxInt(a, b);
-        for (int i = 1; i <= list.length; i++) {
-            result = maxInt(result, list[i - 1]);
+        for (int value:list) {
+            result = maxInt(result, value);
         }
         return result;
     }
@@ -177,8 +167,8 @@ public class StaticMethodList {
      */
     public static String convertCharacterArray(char[] array) {
         String result = "";
-        for (int i = 1; array != null && i <= array.length; i++) {
-            result = result + String.valueOf(array[i - 1]);
+        for (int i = 0; array != null && i < array.length; i++) {
+            result = result + String.valueOf(array[i]);
         }
         return result;
     }
@@ -211,8 +201,8 @@ public class StaticMethodList {
     public static int isValuePresentinArrayAsc(int array[], int value) {
         int result = -1;
 
-        for (int i = 1; (array != null) && (result == -1) && (i <= array.length); i++) {
-            if (array[i - 1] == value) {
+        for (int i = 0; (array != null) && (result == -1) && (i < array.length); i++) {
+            if (array[i] == value) {
                 result = i - 1;
             }
         }
@@ -224,14 +214,11 @@ public class StaticMethodList {
      *
      * @param array двумерный массив строк
      */
-    public static void printIntArray(int[] array) {
-
-        if (array != null) {
-            for (int i = 1; i <= array.length; i++) {
-                System.out.print(array[i - 1] + ", ");
-            }
-            System.out.println("");
+    public static void print(int[] array) {
+        for (int value:array) {
+            System.out.print(value + ", ");
         }
+        System.out.println("");
     }
 
     /**
@@ -246,11 +233,9 @@ public class StaticMethodList {
     public static int isValuePresentInArrayDesc(int array[], int value) {
         int result = -1;
 
-        if (array != null) {
-            for (int i = array.length; (result == -1) && (i >= 0); i--) {
-                if (array[i - 1] == value) {
-                    result = i - 1;
-                }
+        for (int i = array.length - 1; (result == -1) && (i >= 0); i--) {
+            if (array[i] == value) {
+                result = i;
             }
         }
         return result;
@@ -277,11 +262,7 @@ public class StaticMethodList {
      * @return Признак высокосности года. true - высокостный год
      */
     public static boolean isLeapYear(int year) {
-        boolean result = false;
-        if ((((year % 4) == 0) && ((year % 100) != 0)) || (year % 400) == 0) {
-            result = true;
-        }
-        return result;
+        return ((((year % 4) == 0) && ((year % 100) != 0)) || (year % 400) == 0);
     }
 
     /**
@@ -316,12 +297,10 @@ public class StaticMethodList {
     public static String[] stringArrayFilter(String[] array, String pattern) {
         String[] result = null;
 
-        if (pattern != null) {
-            for (int i = 1; i <= array.length; i++) {
-                if ((array[i - 1] != null) &&
-                        array[i - 1].contains(pattern)) {
-                    result = addString(result, array[i - 1]);
-                }
+        for (String value:array) {
+            if ((value != null) &&
+                    value.contains(pattern)) {
+                result = addString(result, value);
             }
         }
         return result;
@@ -333,10 +312,8 @@ public class StaticMethodList {
      * @param array массив строк
      */
     public static void printSimpleStringArray(String[] array) {
-        if (array != null) {
-            for (int i = 1; i <= array.length; i++) {
-                System.out.println("[" + i + "]|" + array[i - 1]);
-            }
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("[" + i + "]|" + array[i]);
         }
     }
 
@@ -351,9 +328,9 @@ public class StaticMethodList {
         if (value == 0) {
             throw new RuntimeException("printMultipleIntArrayValues:  0 value  detected...");
         } else if (array != null) {
-            for (int i = 1; i <= array.length; i++) {
-                if ((array[i - 1] % value) == 0) {
-                    System.out.print("[" + i + "] " + array[i - 1] + ',');
+            for (int i = 0; i < array.length; i++) {
+                if ((array[i] % value) == 0) {
+                    System.out.print("[" + i + "] " + array[i] + ',');
                 }
             }
         }
@@ -376,14 +353,12 @@ public class StaticMethodList {
      * @param array - массив
      */
     public static void sortIntArrayAsc(int[] array) {
-        int tmpValue;
-
-        for (int i = 1; array != null && i < +array.length; i++) {
-            for (int j = i + 1; j <= array.length; j++) {
-                if (array[i - 1] > array[j - 1]) {
-                    tmpValue = array[j - 1];
-                    array[j - 1] = array[i - 1];
-                    array[i - 1] = tmpValue;
+        for (int i = 0; array != null && i < array.length; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] > array[j]) {
+                    int tmpValue = array[j];
+                    array[j] = array[i];
+                    array[i] = tmpValue;
                 }
             }
         }
@@ -395,14 +370,12 @@ public class StaticMethodList {
      * @param array - массив
      */
     public static void sortIntArrayDesc(int[] array) {
-        int tmpValue;
-
-        for (int i = 1; array != null && i < +array.length; i++) {
-            for (int j = i + 1; j <= array.length; j++) {
-                if (array[i - 1] < array[j - 1]) {
-                    tmpValue = array[j - 1];
-                    array[j - 1] = array[i - 1];
-                    array[i - 1] = tmpValue;
+        for (int i = 0; array != null && i < array.length; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] < array[j]) {
+                    int tmpValue = array[j];
+                    array[j] = array[i];
+                    array[i] = tmpValue;
                 }
             }
         }
@@ -415,17 +388,17 @@ public class StaticMethodList {
      * @param array - массив
      */
     public static void sortIntArray(int[] array, boolean isAscSorting) {
-        int tmpValue;
 
-        for (int i = 1; array != null && i < +array.length; i++) {
-            for (int j = i + 1; j <= array.length; j++) {
+        for (int i = 0; array != null && i < array.length; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                int tmpValue;
                 if (
-                        (isAscSorting && (array[i - 1] > array[j - 1])) ||
-                                (!isAscSorting && (array[i - 1] < array[j - 1]))
+                        (isAscSorting && (array[i] > array[j])) ||
+                                (!isAscSorting && (array[i] < array[j]))
                         ) {
-                    tmpValue = array[j - 1];
-                    array[j - 1] = array[i - 1];
-                    array[i - 1] = tmpValue;
+                    tmpValue = array[j];
+                    array[j] = array[i];
+                    array[i] = tmpValue;
                 }
             }
         }
@@ -436,13 +409,11 @@ public class StaticMethodList {
      *
      * @param array двумерный массив строк
      */
-    public static void printByteArray(byte[] array) {
-        if (array != null) {
-            for (int i = 1; i <= array.length; i++) {
-                System.out.print(array[i - 1] + ", ");
+    public static void print(byte[] array) {
+            for (byte value :array) {
+                System.out.print(value + ", ");
             }
             System.out.println("");
-        }
     }
 
     /**
@@ -454,9 +425,9 @@ public class StaticMethodList {
     public static boolean isByteDuplicatePresnt(byte[] array) {
         boolean result = false;
 
-        for (int i = 1; array != null && !result && i <= array.length; i++) {
-            for (int j = i + 1; !result && j <= array.length; j++) {
-                result = (array[i - 1] == array[j - 1]);
+        for (int i = 0; array != null && !result && i < array.length; i++) {
+            for (int j = i + 1; !result && j < array.length; j++) {
+                result = (array[i] == array[j]);
             }
         }
         return result;
@@ -478,8 +449,8 @@ public class StaticMethodList {
                 throw new RuntimeException("multiplicateIntArray:firstArray.length <> secondArray.length. ...");
             } else {
                 result = new int[firstArray.length];
-                for (int i = 1; i <= firstArray.length; i++) {
-                    result[i - 1] = firstArray[i - 1] * secondArray[i - 1];
+                for (int i = 0; i < firstArray.length; i++) {
+                    result[i] = firstArray[i] * secondArray[i];
                 }
             }
         }
@@ -515,15 +486,15 @@ public class StaticMethodList {
      */
     public static int[] differenceIntArray(int[] firstArray, int[] secondArray) {
         int[] result = null;
-        boolean isPresent;
 
-        for (int i = 1; firstArray != null && i <= firstArray.length; i++) {
+        for (int i = 0; firstArray != null && i < firstArray.length; i++) {
+            boolean isPresent;
             isPresent = false;
-            for (int j = 1; secondArray != null && !isPresent && j <= secondArray.length; j++) {
-                isPresent = (firstArray[i - 1] == secondArray[j - 1]);
+            for (int j = 0; secondArray != null && !isPresent && j < secondArray.length; j++) {
+                isPresent = (firstArray[i] == secondArray[j]);
             }
             if (!isPresent) {
-                result = addInt(result, firstArray[i - 1]);
+                result = addInt(result, firstArray[i]);
             }
         }
         return result;
@@ -549,11 +520,11 @@ public class StaticMethodList {
      * @return массив в реверсном порядке
      */
     public static int[] reverseIntArray(int[] array) {
-        int tmpValue;
-        for (int i = 1; array != null && i <= array.length / 2; i++) {
-            tmpValue = array[i - 1];
-            array[i - 1] = array[array.length - i];
-            array[array.length - i] = tmpValue;
+
+        for (int i = 0; array != null && i < array.length / 2; i++) {
+            int tmpValue = array[i];
+            array[i] = array[array.length - i - 1];
+            array[array.length - i - 1] = tmpValue;
         }
         return array;
     }
@@ -571,8 +542,8 @@ public class StaticMethodList {
             throw new RuntimeException("generateRandomIntArray:length < 0...");
         } else {
             result = new int[length];
-            for (int i = 1; i <= length; i++) {
-                result[i - 1] = (int) (Math.random() * maxValue);
+            for (int i = 0; i < length; i++) {
+                result[i] = (int) (Math.random() * maxValue);
             }
         }
         return result;
@@ -593,8 +564,8 @@ public class StaticMethodList {
             throw new RuntimeException("generateRandomIntArray:length < 0...");
         } else {
             result = new int[length];
-            for (int i = 1; i <= length; i++) {
-                result[i - 1] = (int) (Math.random() * (maxValue - minValue) + minValue);
+            for (int i = 0; i < length; i++) {
+                result[i] = (int) (Math.random() * (maxValue - minValue) + minValue);
             }
         }
         return result;
@@ -626,8 +597,8 @@ public class StaticMethodList {
      */
     public static String reverseString(String array) {
         StringBuilder newArray = new StringBuilder();
-        for (int i = 1; array != null && i <= array.length(); i++) {
-            newArray.append(array.charAt(array.length() - i));
+        for (int i = 0; array != null && i < array.length(); i++) {
+            newArray.append(array.charAt(array.length() - i - 1));
         }
         return newArray.toString();
     }
@@ -666,9 +637,9 @@ public class StaticMethodList {
             throw new RuntimeException("maxArrayInt:array  is null...");
         } else {
             maxValue = array[0];
-            for (int i = 2; i <= array.length; i++) {
-                if (maxValue < array[i - 1]) {
-                    maxValue = array[i - 1];
+            for (int i = 1; i < array.length; i++) {
+                if (maxValue < array[i]) {
+                    maxValue = array[i];
                 }
             }
         }
@@ -680,28 +651,28 @@ public class StaticMethodList {
         System.out.println("Start...");
         printDelimeter("Exersize : 1.");
         // 1. Exersize:  принимает массив чаров, выводит его на экран
-        printCharacterArray("abcdef".toCharArray());
+        print("abcdef".toCharArray());
         printDelimeter("Exersize : 2.");
         // 2. Exersize:  принимает 2м массив строк, выводит его на экран
-        printStringArray(stringArray);
+        print(stringArray);
         System.out.println("");
-        for (int i = 1; i <= stringArray.length; i++) {
-            for (int j = 1; stringArray[i - 1] != null && j <= stringArray[i - 1].length; j++) {
-                stringArray[i - 1][j - 1] = "test{" + i + "}{" + j + "}text";
+        for (int i = 0; i < stringArray.length; i++) {
+            for (int j = 0; stringArray[i] != null && j < stringArray[i].length; j++) {
+                stringArray[i][j] = "test{" + i + "}{" + j + "}text";
             }
         }
         stringArray[2] = null;
-        printStringArray(stringArray);
+        print(stringArray);
         printDelimeter("Exersize : 3.");
         //3 Exersize. принимает 2м массив интов, возвращает 2мерный массив чаров,
         // каждый символ в позиции массива соответствует коду символа передаваемого инта
         int intArray[][] = {{1, 2, 3}, {4, 5, 'a'}};
         char charArray[][] = convertIntArrayToCharArray(intArray);
-        printCharArray(charArray);
+        print(charArray);
         printDelimeter("Exersize : 4.");
         // 4 Exersize: принимает 2м массив интов,  ивертирует массив интов (каждое значение в передаваемом массиве меняет знак
         invertIntArray(intArray);
-        printIntArray(intArray);
+        print(intArray);
         printDelimeter("Exersize : 5.");
         //5. Exersize : приминает 2 инта, а и б, возвращает большее их этих 2х чисел
         System.out.println("max value of 5 and 6: " + maxInt(5, 6));
@@ -741,15 +712,14 @@ public class StaticMethodList {
         System.out.println("isValuePresentinArrayAsc({2,1,1}, 1):" + isValuePresentinArrayAsc(intArray[0], 1));
         printDelimeter("Exersize : 11.");
         System.out.println("isValuePresentinArrayDesc(2,1,1}l, 1):" + isValuePresentInArrayDesc(intArray[0], 1));
-        System.out.println("isValuePresentinArrayDesc(null, 1):" + isValuePresentInArrayDesc(null, 1));
         printDelimeter("Exersize : 12.");
         for (int i = 0; i <= 8; i++) {
             System.out.println(i + "!:=" + factorial(i));
         }
         printDelimeter("Exersize : 13.");
         int[] yearArray = {2000, 2001, 2002, 2004, 2005, 1990, 1600, 2100, 2200, 2300};
-        for (int i = 1; i <= yearArray.length; i++) {
-            System.out.println("isLeapYear(" + yearArray[i - 1] + "]=" + isLeapYear(yearArray[i - 1]));
+        for (int year:yearArray) {
+            System.out.println("isLeapYear(" +year + "]=" + isLeapYear(year));
         }
         printDelimeter("Exersize : 14.");
         //14. Принимает массив строк и просто строку,
@@ -757,10 +727,6 @@ public class StaticMethodList {
         //т.е. отфильтрованый из первого
         String[] simpleStringArray = {"test123test", "test234test", "tput123put", null, "get123get"};
         String[] fileredStringArray;
-        fileredStringArray = stringArrayFilter(simpleStringArray, null);
-        printSimpleStringArray(fileredStringArray);
-        fileredStringArray = stringArrayFilter(null, null);
-        printSimpleStringArray(fileredStringArray);
         fileredStringArray = stringArrayFilter(simpleStringArray, "123");
         printSimpleStringArray(fileredStringArray);
         printDelimeter("Exersize : 15.");
@@ -777,28 +743,28 @@ public class StaticMethodList {
         //17. метод принимает массив интов сортирует его по возрастанию
         int[] unsortedArray = {2500, 2001, 2002, 2004, 2005, 1990, 1600, 2100, 2200, 2300};
         sortIntArrayAsc(unsortedArray);
-        printIntArray(unsortedArray);
+        print(unsortedArray);
         printDelimeter("Exersize : 18.");
         //18. метод приминимает массив интов сортирует его по убыванию
         //(нельзя использовать методы сторонних классов)
         sortIntArrayDesc(unsortedArray);
-        printIntArray(unsortedArray);
+        print(unsortedArray);
         printDelimeter("Exersize : 19.");
         //19. метод принимает массив интов и булен, если булен тру то сортирует по убываниию,
         //иначе по возрастанию
         sortIntArray(unsortedArray, false);
-        printIntArray(unsortedArray);
+        print(unsortedArray);
         sortIntArray(unsortedArray, true);
-        printIntArray(unsortedArray);
+        print(unsortedArray);
         sortIntArray(unsortedArray, false);
-        printIntArray(unsortedArray);
+        print(unsortedArray);
         byte[] arrayButes = {10, 12, 13, 16};
         // 20. принимает массив байт, если в массиве есть повторяющиеся елементы, возвращает тру
         printDelimeter("Exersize : 20.");
-        printByteArray(arrayButes);
+        print(arrayButes);
         System.out.println("Check duplicates:" + isByteDuplicatePresnt(arrayButes));
         arrayButes[2] = (byte) 10;
-        printByteArray(arrayButes);
+        print(arrayButes);
         System.out.println("Check duplicates:" + isByteDuplicatePresnt(arrayButes));
         //21. принимает два массива интов одинаковых по длинне, возращает массив интов который состоит из перемноженных
         // елементов входящих массивов
@@ -807,20 +773,20 @@ public class StaticMethodList {
         int secondArray[] = {10, 20, 30, 40, 50};
         int multiplicationArray[];
         multiplicationArray = multiplicateIntArray(firstArray, secondArray);
-        printIntArray(multiplicationArray);
+        print(multiplicationArray);
         printDelimeter("Exersize : 22.");
         int firstIntArray[] = {1, 2, 3, 4, 5};
         int secondIntArray[] = {1, 20, 30, 40, 50};
         int diffArray[];
         diffArray = symmetricDifferenceIntArray(firstIntArray, secondIntArray);
-        printIntArray(diffArray);
+        print(diffArray);
         printDelimeter("Exersize : 23.");
         diffArray = reverseIntArray(diffArray);
-        printIntArray(diffArray);
+        print(diffArray);
         printDelimeter("Exersize : 24.");
-        printIntArray(generateRandomIntArray(10, -10));
+        print(generateRandomIntArray(10, -10));
         printDelimeter("Exersize : 25.");
-        printIntArray(generateRandomIntArray(10, 70, 80));
+        print(generateRandomIntArray(10, 70, 80));
         printDelimeter("Exersize : 26.");
         System.out.println("Check isStringContainedSpecialChars(null):" + isStringContainedSpecialChars(null));
         System.out.println("Check isStringContainedSpecialChars(123):" + isStringContainedSpecialChars("123"));
@@ -833,13 +799,13 @@ public class StaticMethodList {
         System.out.println("Check reverseString(123456_):" + reverseString("123456_"));
         System.out.println("Check reverseString(null):" + reverseString(null));
         printDelimeter("Exersize : 28.");
-        printIntArray(firstIntArray);
-        printIntArray(secondArray);
+        print(firstIntArray);
+        print(secondArray);
         diffArray = addIntArray(firstIntArray, secondArray);
-        printIntArray(diffArray);
+        print(diffArray);
         printDelimeter("Exersize : 29.");
         diffArray = generateRandomIntArray(10, 70, 80);
-        printIntArray(diffArray);
+        print(diffArray);
         System.out.println("Check maxArrayInt(diffArray):" + maxArrayInt(diffArray));
         System.out.println("Stop...");
     }
